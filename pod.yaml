@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: frontend
+  labels:
+    app: ecomern-frontend
+spec:
+  containers:
+    - name: ecomern-frontend
+      image: thehufaaz/ecomern-frontend
+      ports:
+        - containerPort: 3001
