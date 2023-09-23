@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+<h1>Ecomern Project</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p>This repository contains the necessary files and configurations to deploy an application using Amazon Elastic Kubernetes Service (EKS). The project includes a Dockerfile to containerize the application and push it to Docker Hub, Terraform configurations to provision the AWS EKS cluster and EC2 nodes, Kubernetes configuration for interacting with the EKS cluster, and deployment and service manifest YAML files for deploying the application. You can also access the web application via the exposed node port.</p>
 
-## Available Scripts
+ &nbsp; <h4>Dockerization and Docker Hub</h4>
 
-In the project directory, you can run:
+1. Clone this repository to your local machine:
+```bash
+git clone https://github.com/ufas-001/ecomerce-cloud-client-service.git
 
-### `npm start`
+cd your-repo
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Build a Docker image of your application using the provided Dockerfile:
+```bash
+docker build -t your-image-name:your-tag .
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Log in to Docker Hub:
+```bash
+docker login
+```
 
-### `npm test`
+4. Push the Docker image to Docker Hub:
+```bash
+docker push yourusername/your-image-name:your-tag
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+&nbsp; <h4>AWS EKS Cluster Provisioning</h4>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Navigate to the terraform directory:
+```bash
+cd terraform
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Initialize Terraform:
+```bash
+terraform init
+```
+3. Apply the Terraform configuration to provision the AWS EKS cluster and EC2 nodes:
+```bash
+terraform apply
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+&nbsp; <h4>Configuring kubectl</h4>
 
-### `npm run eject`
+1. Configure kubectl to use the newly created EKS cluster:
+```bash
+aws eks --region <your-region> update-kubeconfig --name <your-cluster-name>
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+&nbsp; <h4>Deploying the Application</h4>
+1. Navigate to the Kubernetes directory:
+```bash
+cd kubernetes
+```
+2. Deploy the application using the provided manifest files:
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+&nbsp; <h4>Accessing the Application</h4>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Get the external IP of the EKS node:
+```bash
+kubectl get nodes -o wide
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Access the web application using the exposed node port. Open a web browser and enter 
+```bash
+http://<node-external-ip>:<node-port>
+```
+Replace <node-external-ip> and <node-port> with the values obtained from the previous s
