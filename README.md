@@ -1,6 +1,8 @@
 <h1>Ecomern Project</h1>
 
-<p>This repository contains the necessary files and configurations to deploy an application using Amazon Elastic Kubernetes Service (EKS). The project includes a Dockerfile to containerize the application and push it to Docker Hub, Terraform configurations to provision the AWS EKS cluster and EC2 nodes, Kubernetes configuration for interacting with the EKS cluster, and deployment and service manifest YAML files for deploying the application. You can also access the web application via the exposed node port.</p>
+![Example Image](./apparchitecture.png)
+
+<p>This repository contains the necessary files and configurations to deploy this application using Amazon Elastic Kubernetes Service (EKS). The project includes a Dockerfile to containerize the application and push it to Docker Hub, Terraform configurations to provision the AWS EKS cluster and EC2 nodes, Kubernetes configuration for interacting with the EKS cluster, and deployment and service manifest YAML files for deploying the application. You can also access the web application via the exposed node port.</p>
 
  &nbsp; <h4>Dockerization and Docker Hub</h4>
 
